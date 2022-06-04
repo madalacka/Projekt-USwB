@@ -1,0 +1,19 @@
+cqlsh
+
+CREATE KEYSPACE przestrzen WITH replication = {'class':'SimpleStrategy','replication_factor',:'1'} AND durable_writes = 'true';
+DESCRIBE KEYSPACES
+
+CREATE TABLE Klienci (Klinet_id int PRIMARY KEY, Imie text, Nazwisko text, Nr_telefonu int, Email text);
+
+CREATE TABLE Ksiazki (Ksiazka_id int PRIMARY KEY, Tytul text, Gatunek text, Autor text, Dostepny boolean);
+
+CREATE TABLE Klient_po_ksiazkach (Ksiazka_id int,Imie text, Nazwisko text, Data date, stempel_czasowy timeuuid,
+PRIMARY KEY (Ksiazka_id, stempel_czasowy));
+
+CREATE TABLE Ksiazki_po_kliencie (Klient_id int,stempel_czasowy timeuuid, Tytul text, Autor text,
+PRIMARY KEY (Klient_id, stempel_czasowy));
+
+
+CREATE TABLE Dostepnosc (Ksiazka_id int PRIMARY KEY, Nazwa text, Autor text, Dostepny boolean);
+
+DESCRIBE TABLES
